@@ -1,7 +1,7 @@
 # terraform-docker-stevebot - main.tf
 
 data "docker_registry_image" "this" {
-  name = "${var.image_source}:${image_version}"
+  name = "${var.image_source}:${var.image_version}"
 }
 
 resource "docker_image" "this" {
