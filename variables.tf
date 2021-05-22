@@ -47,12 +47,12 @@ variable "labels" {
   default     = {}
 }
 
-variable "stevebot_token" {
+variable "discord_token" {
   type        = string
   description = "Discord token used by this bot."
 }
 
-variable "stevebot_command_prefix" {
+variable "command_prefix" {
   type        = string
   description = "Command prefix used by this bot."
   default     = "~"

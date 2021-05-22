@@ -16,8 +16,8 @@ resource "docker_container" "this" {
   image = docker_image.this.latest
 
   env = [
-    "STEVEBOT_TOKEN=${var.stevebot_token}",
-    "STEVEBOT_COMMAND_PREFIX=${var.stevebot_command_prefix}",
+    "STEVEBOT_TOKEN=${var.discord_token}",
+    "STEVEBOT_COMMAND_PREFIX=${var.command_prefix}",
     "STEVEBOT_RCON_HOST=${var.rcon_host}",
     "STEVEBOT_RCON_PORT=${var.rcon_port}",
     "STEVEBOT_RCON_PASS=${var.rcon_password}",
