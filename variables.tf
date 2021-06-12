@@ -68,9 +68,22 @@ variable "rcon_port" {
   type        = number
   description = "Port to connect to via rcon."
   default     = 25575
+  sensitive   = true
 }
 
 variable "rcon_password" {
   type        = string
   description = "Password to use when connecting to the host via rcon."
+}
+
+variable "allowed_commands" {
+  type        = list(string)
+  description = "A list of allowed commands."
+  default     = []
+}
+
+variable "forbidden_commands" {
+  type        = list(string)
+  description = "A list of allowed commands."
+  default     = []
 }

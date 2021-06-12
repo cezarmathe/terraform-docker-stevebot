@@ -15,13 +15,7 @@ resource "docker_container" "this" {
   name  = local.container_name
   image = docker_image.this.latest
 
-  env = [
-    "STEVEBOT_TOKEN=${var.discord_token}",
-    "STEVEBOT_COMMAND_PREFIX=${var.command_prefix}",
-    "STEVEBOT_RCON_HOST=${var.rcon_host}",
-    "STEVEBOT_RCON_PORT=${var.rcon_port}",
-    "STEVEBOT_RCON_PASS=${var.rcon_password}",
-  ]
+  env = [for k, v in local.env : "${k}=${v}" if v != ""]
 
   dynamic "labels" {
     for_each = var.labels
@@ -41,4 +35,17 @@ locals {
   container_name = var.container_name != "" ? var.container_name : (
     "stevebot_${random_uuid.this.result}"
   )
+
+  allowed_commands = join(",", var.allowed_commands)
+  forbidden_commands = join(",", var.forbidden_commands)
+
+  env = {
+    STEVEBOT_RCON_HOST      = var.rcon_host
+    STEVEBOT_RCON_PORT      = var.rcon_port
+    STEVEBOT_RCON_PASSWORD  = var.rcon_password
+    STEVEBOT_DISCORD_TOKEN  = var.discord_token
+    STEVEBOT_COMMAND_PREFIX = var.command_prefix
+    STEVEBOT_COMMAND_PREFIX = local.allowed_commands
+    STEVEBOT_COMMAND_PREFIX = local.forbidden_commands
+  }
 }
